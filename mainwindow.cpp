@@ -132,26 +132,13 @@ void MainWindow::OnPushButtonEqualClicked()
 
 double MainWindow::evaluateExpression(const QString &expression)
 {
-    // Split the expression into parts
+  
     QStringList parts = expression.split(QRegExp("([+\\-×÷%])"), QString::SkipEmptyParts);
-
-    // If the expression does not contain two parts or operator not recognized, return NaN
-    if (parts.size() != 2) {
-        return std::numeric_limits<double>::quiet_NaN();
-    }
-
-    // Extract the operator and operands
     QString op = expression.mid(parts.at(0).size(), 1);
     double num1 = parts.at(0).toDouble();
     double num2 = parts.at(1).toDouble();
 
-    // Check for division by zero
-    if ((op == "÷" || op == "%") && num2 == 0.0) {
-        return std::numeric_limits<double>::quiet_NaN(); // Return NaN for undefined operation
-    }
-
-    // Perform the operation
-    double result = 0.0;
+     double result = 0.0;
     if (op == "+")
         result = num1 + num2;
     else if (op == "-")
